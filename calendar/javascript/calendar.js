@@ -5,7 +5,11 @@ prev = document.querySelector(".prev");
 next = document.querySelector(".next"),
 todbtn = document.querySelector(".tod-btn"),
 todobtn = document.querySelector(".todo-btn"),
-dateinput = document.querySelector(".date-input")
+dateinput = document.querySelector(".date-input"),
+eventDay = document.querySelector(".event-day"),
+eventDate = document.querySelector(".event-date"),
+eventsContainer = document.querySelector(".events");
+
 
 
 
@@ -29,6 +33,39 @@ const months = [
     "December",
 ];
 
+const eventsArr = [
+    {
+        day : 29,
+        month: 2,
+        year: 2024,
+        events: [
+            {
+                title : "edsadsds",
+                time : "10:00 am",
+            },
+            {
+                title : "asdasd",
+                time : "11:00 am",
+            },
+        ],
+    },
+    {
+        day : 12,
+        month: 2,
+        year: 2024,
+        events: [
+            {
+                title : "edsadsds",
+                time : "10:00 am",
+            },
+            {
+                title : "asdasd",
+                time : "11:00 am",
+            },
+        ],
+    },
+];
+
 function initCalendar(){
     const firstDay= new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
@@ -46,21 +83,46 @@ function initCalendar(){
     }
 
 for (let i = 1; i <= lastDate; i++){
+
+    let event = false;
+    eventsArr.forEach((eventObj)=>{
+        if(
+            eventObj.day === i &&
+            eventObj.month === month + 1 &&
+            eventObj.year === year
+        ){
+            event = true;
+        }
+    })
+
+
     if (
     i === new Date().getDate() && 
     year === new Date().getFullYear() && 
     month === new Date().getMonth()
     ){
-        days += `<div class="day today" >${i}</div>`;
-    }
-    else{
-        days += `<div class="day " >${i}</div>`;
+        activeDay = i;
+        getActiveDay (i);
+        updateEvents(i);
+       if(event){
+      days += `<div class="day today active event" >${i}</div>`;
+       }else{
+       days += `<div class="day today active" >${i}</div>`;
     }   
+}else{
+
+if(event){
+    days += `<div class="day event" >${i}</div>`;
+     }else{
+     days += `<div class="day " >${i}</div>`;
+  }   
+}
 }
 for(let j = 1; j <= incomDays; j++){
     days += `<div class="day incom-date">${j}</div>`;
 }
     daysContainer.innerHTML = days;
+    addlistner();
 
 
 }
@@ -121,15 +183,131 @@ function todoDate(){
 }
 
 
-const addEventBtn = document.querySelector(".add-event");
-const addEventContainer = document.querySelector(".add-event-wrapper");
-const addEventCloseBtn = document.querySelector(".close");
+const addEventBtn = document.querySelector(".add-event"),
+ addEventContainer = document.querySelector(".add-event-wrapper"),
+ addEventCloseBtn = document.querySelector(".close"),
+ addEventTitle = document.querySelector(".event-name"),
+ addEventFrom = document.querySelector(".event-time-from"),
+ addEventTo = document.querySelector(".event-time-to");
 
  addEventBtn.addEventListener("click", () => {
     addEventContainer.classList.toggle("active");
  });
- addEventBtn.addEventListener("click", () => {
+ addEventCloseBtn.addEventListener("click", () => {
     addEventContainer.classList.remove("active");
  });
+
+document.addEventListener("click",(e)=>{
+    if (e.target != addEventBtn && !addEventContainer.contains(e.target)) {
+        addEventContainer.classList.remove("active");
+    }
+});
+
+addEventTitle.addEventListener("input",(e)=>{
+    addEventTitle.value = addEventTitle.value.slice(0,50);
+});
+
+addEventFrom.addEventListener("input" , (e) => {
+    addEventFrom.value = addEventFrom.value.replace(/[^0-9:]/g,"");
+    if (addEventFrom.value.length === 2){
+        addEventFrom.value += ":";
+    }
+    if (addEventFrom.value.length > 5 ){
+        addEventFrom.value = addEventFrom.value.slice(0,5);
+    }
+});
+addEventTo.addEventListener("input" , (e) => {
+    addEventTo.value = addEventTo.value.replace(/[^0-9:]/g,"");
+    if (addEventTo.value.length === 2){
+        addEventTo.value += ":";
+    }
+    if (addEventTo.value.length > 5 ){
+        addEventTo.value = addEventTo.value.slice(0,5);
+    }
+});
+
+function addlistner(){
+    const days =  document.querySelectorAll(".day");
+    days.forEach((day)=>{
+        day.addEventListener("click", (e)=>{
+            activeDay = Number(e.target.innertHTML);
+            getActiveDay(e.target.innerHTML);
+            updateEvents(Number(e.target.innerHTML));
+
+            days.forEach((day)=>{
+                day.classList.remove("active");
+            });
+            if(e.target.classList.contains("prev-date")){
+                prevMonth();
+
+                setTimeout(()=>{
+                    const days = document.querySelectorAll(".day");
+
+                    days.forEach((day)=>{
+                        if(!day.classList.contains("prev-date")&& day.innerHTML ===
+                        e.target.innerHTML){
+                            day.classList.add("active");
+                        }
+                    });
+                } , 100);
+            } else if (e.target.classList.contains("incom-date")){
+                nextMonth();
+
+                setTimeout(() => {
+                    const days = document.querySelectorAll(".day");
+
+                    days.forEach((day)=>{
+                        if(!day.classList.contains("incom-date")&& day.innerHTML ===
+                        e.target.innerHTML){
+                            day.classList.add("active");
+                        }
+                    });
+                } , 100);
+            }else{
+                e.target.classList.add("active");
+            }
+        });
+    });
+}
+
+
+function getActiveDay(date){
+    const day = new Date(year,month,date);
+    const dayName = day.toString().split(" ")[0];
+    eventDay.innerHTML = dayName;
+    eventDate.innerHTML = date + " " + months[month] + " " + year;
+
+}
+function updateEvents(date){
+    let events = "";
+    eventsArr.forEach((event)=>{
+        if (
+            date === event.day &&
+            month + 1 === event.month &&
+            year === event.year
+        ){
+            event.events.forEach((event)=>{
+                events += `
+                <div class = "event"> <div class ="title">
+                <i class = "fas fa-circle"></i>
+                <h3 class = "event-title">${event.title}</h3>
+                </div>
+                <div class = "event-time">
+                <span class ="event-time">${event.time}></span>
+                </div>
+                </div>`;
+
+
+            });
+        }
+    });
+    if(events === ""){
+        events = `<div class="no-event">
+        <h3>No Events</h3>
+        </div>`;
+    }
+    console.log(events);
+    eventsContainer.innerHTML = events;
+}
 
   
