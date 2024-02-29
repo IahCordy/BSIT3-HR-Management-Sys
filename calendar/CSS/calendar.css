@@ -498,7 +498,7 @@ color:var(--primary-clr);
     pointer-events: none;
 }
 .events .event .title .event-title{
-    font-size: 1rem;
+font-size: 1rem;
 font-weight: 400;
 margin-left: 20px;
 }
@@ -506,7 +506,8 @@ margin-left: 20px;
     color: var(--primary-clr);
     font-size: 0.5rem;
 }
-.events .event:hover .title i{
+.events .event:hover .title i,
+.events .event:hover .event-time{
     color: #fff;
 }
 .events .event .title .event-time{
@@ -516,7 +517,7 @@ margin-left: 20px;
     margin-left: 15px;
     pointer-events: none;
 }
-.event::after {
+.events .event::after {
     content : "✔";
     position: absolute;
     top: 50%;
@@ -529,8 +530,19 @@ margin-left: 20px;
     color: var(--primary-clr);
     transform: translateY(-50%);
 }
-.event:hover::after {
+.events .event:hover::after {
     display: flex;
+}
+.events .no-event{
+    margin-top: 40%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #878787;
 }
 .add-event-wrapper {
     position: absolute;
@@ -650,4 +662,3 @@ margin-left: 20px;
 .add-event i {
     pointer-events: none;
 }
-
