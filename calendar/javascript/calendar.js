@@ -9,7 +9,7 @@ dateinput = document.querySelector(".date-input"),
 eventDay = document.querySelector(".event-day"),
 eventDate = document.querySelector(".event-date"),
 eventsContainer = document.querySelector(".events");
-
+addEventSubmit = document.querySelector(".add-event-btn")
 
 
 
@@ -33,38 +33,9 @@ const months = [
     "December",
 ];
 
-const eventsArr = [
-    {
-        day : 29,
-        month: 2,
-        year: 2024,
-        events: [
-            {
-                title : "edsadsds",
-                time : "10:00 am",
-            },
-            {
-                title : "asdasd",
-                time : "11:00 am",
-            },
-        ],
-    },
-    {
-        day : 12,
-        month: 2,
-        year: 2024,
-        events: [
-            {
-                title : "edsadsds",
-                time : "10:00 am",
-            },
-            {
-                title : "asdasd",
-                time : "11:00 am",
-            },
-        ],
-    },
-];
+
+let eventsArr = [];
+getEvents();
 
 function initCalendar(){
     const firstDay= new Date(year, month, 1);
@@ -288,7 +259,8 @@ function updateEvents(date){
         ){
             event.events.forEach((event)=>{
                 events += `
-                <div class = "event"> <div class ="title">
+                <div class = "event"> 
+                <div class ="title">
                 <i class = "fas fa-circle"></i>
                 <h3 class = "event-title">${event.title}</h3>
                 </div>
@@ -306,8 +278,121 @@ function updateEvents(date){
         <h3>No Events</h3>
         </div>`;
     }
-    console.log(events);
     eventsContainer.innerHTML = events;
+    saveEvents();
+}
+addEventSubmit.addEventListener("click",() => {
+    const eventTitle = addEventTitle.value;
+    const eventTimeFrom = addEventFrom.value;
+    const eventTimeTo = addEventTo.value;
+
+    if(eventTitle === "" || eventTimeFrom === "" || eventTimeTo === ""){
+        alert("Please Fill all the Fields");
+        return;
+    }
+    const timeFromArr = eventTimeFrom.split(":");
+    const timeToArr = eventTimeTo.split(":");
+
+    if(
+        timeFromArr.length != 2 ||
+        timeToArr.length != 2 ||
+        timeFromArr[0] > 23 || 
+        timeFromArr[1] > 59 || 
+        timeToArr[0] > 23 || 
+        timeToArr[1] > 59 
+    ){
+        alert("Invalid Time Format!");
+    }
+    const timeFrom = convertTime(eventTimeFrom);
+    const timeTo = convertTime(eventTimeTo);
+
+    const newEvent = {
+        title : eventTitle,
+        time : timeFrom + " - " + timeTo,
+    };
+
+    let eventAdded  = false ; 
+
+
+    if(eventsArr.length > 0 ){
+        eventsArr.forEach((item)=>{
+            if ( 
+                item.day === activeDay &&
+                item.month === month + 1&&
+                item.year === year 
+            ){
+                item.events.push(newEvent);
+                eventAdded = true;
+            }
+        });
+    }
+
+
+    if (!eventAdded){
+        eventsArr.push({
+            day : activeDay,
+            month : month + 1,
+            year : year,
+            events : [newEvent],
+        });
+    }
+    addEventContainer.classList.remove("active");
+    addEventTitle.value = "";
+    addEventFrom.value = "";
+    addEventTo.value = "";
+
+    updateEvents(activeDay);
+
+    const activeDayElem = document.querySelector(".day.active");
+    if(!activeDayElem.classList.contains("event")){
+        activeDayElem.classList.add("event");
+            
+        }
+});
+function convertTime(time){
+    let timeArr = time.split(":");
+    let timeHour = timeArr[0];
+    let timeMin =timeArr[1];
+    let timeFormat = timeHour > 12 ? "PM" : "AM";
+    timeHour = timeHour % 12 || 12;
+    time = timeHour + " : " + timeMin + " " + timeFormat ;
+    return time;
 }
 
+eventsContainer.addEventListener("click", (e)=>{
+    if (e.target.classlist.contains("event")){
+        const eventTime = e.target.children[0].children[1].innerHTML;
+        eventsArr.forEach((event)=>{
+            if (event.day === activeDay &&
+                event.month === month + 1 &&
+                event.year === year){
+                    event.events.forEach((item, index)=> {
+                        if (item.title === eventTitle){
+                            event.events.splice(index , 1);
+
+                        }
+                    });
+
+                    if (event.events.length === 0 ){
+                        eventsArr.splice(eventsArr.indexOf(event),1);
+                        const activeDayElem = document.querySelector(".day.active")
+                        if(activeDayElem.classList.contains("event")){
+                            activeDayElem.classList.remove("event");
+                        }
+                    }
+                }
+        });
+        updateEvents(activeDay);
+    }
+});
+function saveEvents(){
+    localStorage.setItem("events", JSON.stringify(eventsArr));
+}
+function getEvents(){
+if(localStorage.getItem("events" === null)){
+return;
+}
+    eventsArr.push(...JSON.parse(localStorage.getItem("events")))
+
+}
   
