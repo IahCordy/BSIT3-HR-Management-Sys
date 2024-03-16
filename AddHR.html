@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link href="./views/output.css" rel="stylesheet"/>
+</head>
+<body>
+    <header class="bg-black py-4 flex justify-end sticky top-0">
+        <div class="text-teal-500 flex items-center justify-center w-full text-2xl">Your Company Name</div>
+    </header>
+
+    <div class="flex justify-center items-center mt-9">
+        <div class="add-contain">
+            <h2 class="text-center addemployeetext">Add HR</h2>
+            <form id="addHRForm" class="text-center">
+                <input class="mar-1 w-64 px-3 py-2 rounded-md bg-white border border-gray-300 focus:outline-none focus:border-blue-500 mb-4" type="text" id="username" name="username" placeholder="Username" required>
+                <input class="mar-2 w-64 px-3 py-2 rounded-md bg-white border border-gray-300 focus:outline-none focus:border-blue-500 mb-4" type="email" id="email" name="email" placeholder="Email" required>                    
+                <button id="submitBtn" class="mar-2 w-64 px-3 py-4 rounded-md bg-green-500 hover:bg-green-600 text-white font-bold" type="button">Register</button>
+            </form>
+            <div id="responseMessage" class="text-center"></div>
+        </div>
+    </div>
+    <script src="AddHR.js"></script>
+
+</body>    
+</html>

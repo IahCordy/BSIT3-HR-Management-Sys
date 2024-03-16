@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="./views/output.css" rel="stylesheet"/>
+</head>
+<body>
+    <header class="bg-black py-4 flex justify-end sticky top-0">
+        <div class="text-teal-500 flex items-center justify-center w-full text-2xl">Your Company Name</div>
+    </header>
+    <div class="flex">
+        <aside class="w-56 sidebar-height bg-amber-500 fixed nig-shadow">
+            <nav>
+                <div class="flex items-center justify-center space-x-2">
+                    <img src="image/profile3.png" alt="User Avatar" class="h-30 w-20">
+                </div>
+                <div id="usernameDisplay" class="text-center flex flex-col usernamespace text-xl/[55px]">
+                    <!-- Placeholder for displaying the username -->
+                </div>
+                <div class="scrollbox">
+                    <ul class="space-y-11 text-xl/[55px] text-left ml-11">
+                        <li class="mt-4"><a href="Dashboard.html">Dashboard</a></li>
+                        <li><a href="201File.html">Employee</a></li>
+                        <li><a href="#">Attendance</a></li>
+                        <li><a href="#">Performance</a></li>
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="#">Leave</a></li>
+                        <li><a href="Settings.html">Settings</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+    </div>
+
+    <div class="flex justify-center items-center mt-9">
+        <div class="add-contain">
+            <h2 class="text-center addemployeetext">Add Employee</h2>
+            <form class="text-center">
+                <input class="mar-1 w-64 px-3 py-2 rounded-md bg-white border border-gray-300 focus:outline-none focus:border-blue-500 mb-4" type="text" id="username" name="username" placeholder="Username" required>
+                <input class="mar-2 w-64 px-3 py-2 rounded-md bg-white border border-gray-300 focus:outline-none focus:border-blue-500 mb-4" type="email" id="email" name="email" placeholder="Email" required>                    
+                <button id="submitBtn" class="mar-2 w-64 px-3 py-4 rounded-md bg-green-500 hover:bg-green-600 text-white font-bold" type="button">Register</button>
+            </form>
+            <div id="responseMessage" class="text-center"></div>
+        </div>
+    </div>
+    <script src="Addemployee.js"></script>
+    <script src="uniqui.js"></script>
+</body>    
+</html>

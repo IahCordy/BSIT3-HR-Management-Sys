@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="./views/output.css" rel="stylesheet"/>
+</head>
+<body>
+    <header class="bg-black py-4 flex justify-end sticky top-0">
+        <div class="text-teal-500 flex items-center justify-center w-full text-2xl">Your Company Name</div>
+    </header>
+    <div class="flex">
+        <aside class="w-56 sidebar-height bg-amber-500 fixed nig-shadow">
+            <nav>
+                <div class="flex items-center justify-center space-x-2">
+                    <img src="image/profile3.png" alt="User Avatar" class="h-30 w-20">
+                </div>
+                <div id="usernameDisplay" class="text-center flex flex-col usernamespace text-xl/[55px]">
+                    <!-- Placeholder for displaying the username -->
+                </div>
+                <div class="scrollbox">
+                    <ul class="space-y-11 text-xl/[55px] text-left ml-11">
+                        <li class="mt-4"><a href="Dashboard.html">Dashboard</a></li>
+                        <li><a href="201File.html">Employee</a></li>
+                        <li><a href="#">Attendance</a></li>
+                        <li><a href="#">Performance</a></li>
+                        <li><a href="calendar.html">Calendar</a></li>
+                        <li><a href="HRLeave.html">Leave</a></li>
+                        <li><a href="Settings.html">Settings</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+    </div>
+    
+<!-- Content outside of the sidebar -->
+<div class="flex justify-center items-center">
+    <a href="Addemployee.html" class="edit-addemployee flex items-center">
+        <svg class="h-8 w-8 text-gray-600 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+        </svg>
+        <div>Add Employee</div>
+    </a>
+</div>
+
+
+<div class="flex flex-col flex-1 items-center justify-center">
+    <div class="clar" id="fileUploadContainer">
+        <!-- Usernames and file uploads will be dynamically added here -->
+    </div>
+</div>
+
+<!-- Include the script file -->
+<script src="201File.js"></script>
+<script src="uniqui.js"></script>
+</body>
+</html>
