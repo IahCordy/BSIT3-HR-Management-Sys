@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="./views/output.css" rel="stylesheet"/>
+</head>
+<body>
+    <header class="bg-black py-4 flex justify-end sticky top-0">
+        <div class="text-teal-500 flex items-center justify-center w-full text-2xl">Your Company Name</div>
+    </header>
+    <div class="flex">
+        <aside class="w-56 sidebar-height fixed sid-shadow">
+            <nav>
+                <div class="flex items-center justify-center space-x-2 mt-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="proficon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                      </svg>
+                      
+                </div>
+                <div id="usernameDisplay" class="text-center flex flex-col usernamespace mt-4 text-white">
+                    <!-- Placeholder for displaying the username -->
+                </div>
+                <div class="scrollbox">
+                    <ul class="space-y-11 text-xl/[55px] text-left ml-11 text-white">
+                        <li class="mt-4"><a href="Dashboard.html">Dashboard</a></li>
+                        <li><a href="201File.html">Employee</a></li>
+                        <li><a href="#">Attendance</a></li>
+                        <li><a href="Performance.html">Performance</a></li>
+                        <li><a href="Calendar.html">Calendar</a></li>
+                        <li><a href="Leave.html">Leave</a></li>
+                        <li><a href="Settings.html">Settings</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+    </div>
+
+    <div class="flex justify-center items-center mt-9">
+        <div class="add-contain">
+            <h1 class="my-form-title text-center">
+                Add Employee
+            </h1>
+            <form class="text-center">
+                <input class="mar-1 w-64 px-3 py-2 rounded-md bg-white border border-gray-300 focus:outline-none focus:border-blue-500 mb-4" type="text" id="username" name="username" placeholder="Username" required>
+                <input class="mar-2 w-64 px-3 py-2 rounded-md bg-white border border-gray-300 focus:outline-none focus:border-blue-500 mb-4" type="email" id="email" name="email" placeholder="Email" required>                    
+                <button id="submitBtn" class="mar-2 w-64 px-3 py-4 rounded-md bg-green-500 hover:bg-green-600 text-white font-bold" type="button">Register</button>
+            </form>
+            <div id="responseMessage" class="text-center"></div>
+        </div>
+    </div>
+    <script src="Addemployee.js"></script>
+    <script src="uniqui.js"></script>
+</body>    
+</html>

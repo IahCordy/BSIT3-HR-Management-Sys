@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="./views/output.css" rel="stylesheet"/>
+</head>
+<body>
+    <header class="bg-black py-4 flex justify-end sticky top-0">
+        <div class="text-teal-500 flex items-center justify-center w-full text-2xl">Your Company Name</div>
+    </header>
+    <div class="flex">
+        <aside class="w-56 sidebar-height fixed sid-shadow">
+            <nav>
+                <div class="flex items-center justify-center space-x-2 mt-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="proficon">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                      </svg>
+                      
+                </div>
+                <div id="usernameDisplay" class="text-center flex flex-col usernamespace mt-4 text-white">
+                    <!-- Placeholder for displaying the username -->
+                </div>
+                <div class="scrollbox">
+                    <ul class="space-y-11 text-xl/[55px] text-left ml-11 text-white">
+                        <li class="mt-4"><a href="Dashboard.html">Dashboard</a></li>
+                        <li><a href="201File.html">Employee</a></li>
+                        <li><a href="#">Attendance</a></li>
+                        <li><a href="Performance.html">Performance</a></li>
+                        <li><a href="Calendar.html">Calendar</a></li>
+                        <li><a href="Leave.html">Leave</a></li>
+                        <li><a href="Settings.html">Settings</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+    </div>
+
+   
+    <div class="container flex flex-col editouter">
+        <div class="max-w-md mx-auto bg-white rounded p-8 shadow-md">
+            <h1 class="text-2xl font-bold mb-4">Employee Performance Rating</h1>
+            <div class="mb-4">
+                <div class="flex justify-between mb-2">
+                    <div>
+                        <button id="prevMonth" class="mr-2 px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded">&lt;</button>
+                        <span id="currentMonth" class="font-bold"></span>
+                        <button id="nextMonth" class="ml-2 px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded">&gt;</button>
+                    </div>
+                    <div>
+                        <button id="prevYear" class="mr-2 px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded">&lt;</button>
+                        <span id="currentYear" class="font-bold"></span>
+                        <button id="nextYear" class="ml-2 px-3 py-1 bg-gray-200 hover:bg-gray-300 rounded">&gt;</button>
+                    </div>
+                </div>
+            </div>
+        <table class="edittabl">
+            <thead>
+                <tr>
+                    <th class="edithead">Username</th>
+                    <th class="edithead">Rating</th>
+                </tr>
+            </thead>
+            <tbody id="performusername" class="bg-white">
+                <!-- Dynamic content will be loaded here -->
+            </tbody>
+        </table>
+    </div>
+    
+    <script src="test2myear.js"></script>
+    <script src="test2.js"></script>
+    </body>
+    </html>
